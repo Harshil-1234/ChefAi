@@ -1,17 +1,14 @@
-import React from 'react'
-import Header from './components/Header'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from "react-router-dom";
+import Header from "./components/Header";
 
 function App() {
-  return (
-    <div className='min-h-screen'>
-      <Header />
 
-      {/* <main className="bg-amber-100 min-h-screen m-0 p-0"> */}
+  return (
+    <div className="bg-orange-50 min-h-screen">
+      <Header />
       <main>
         <Outlet />
       </main>
-
     </div>
   )
 }
