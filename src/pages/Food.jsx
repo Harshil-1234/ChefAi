@@ -16,7 +16,10 @@ function Food() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-    <form className="p-10 flex flex-col" onSubmit={handleSubmit}>
+    <form 
+      className="p-10 flex flex-col items-center justify-center gap-5" 
+      onSubmit={handleSubmit}
+    >
       <input
         type="text"
         className="outline-none w-96 py-2 px-4 bg-[#FFE5C4] shadow-md rounded-lg placeholder-gray-600"
@@ -24,9 +27,14 @@ function Food() {
         value={foodName}
         onChange={(e) => (setFoodName(e.target.value))}
       />
+      {
+        foodName.length > 0 
+        &&
+        <Button 
+          content='Generate Recipe'
+        />
+      }
     </form>
-
-    <Modal foodName={foodName} onGenerate={generateRecipe}/>
 
   </div>
 
