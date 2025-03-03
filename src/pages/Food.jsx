@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import Button from '../components/Button'
-import Modal from '../components/Modal'
+import {getRecipeFromDishName} from '../utils/ai'
+import Recipe from '../components/Recipe'
+import CookingAnimation from '../components/CookingAnimation'
 
 function Food() {
   const [foodName, setFoodName] = useState('')
+  const [recipe, setRecipe] = useState('')
+  const [isLoading, setIsLoading] = useState(false);
 
   const generateRecipe = async () => {
-    console.log(foodName);
+    setIsLoading(true); // Start animation
+    const recipe = await getRecipeFromDishName(foodName);
+    setRecipe(recipe);
+    setIsLoading(false); // Stop animation
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    generateRecipe();
+    await generateRecipe();
   };
 
   return (
@@ -36,7 +43,17 @@ function Food() {
       }
     </form>
 
-  </div>
+    {/* Cooking Animation */}
+      { 
+        isLoading && 
+        <CookingAnimation />
+      }
+
+      {/* Display Recipe */}
+      {!isLoading && recipe && <Recipe recipe={recipe} />}
+
+
+    </div>
 
   )
 }
