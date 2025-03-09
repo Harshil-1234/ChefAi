@@ -28,12 +28,14 @@ export async function getRecipeFromDishName(foodName){
 
 export async function getRecipeFromIngredients(ingredientsArr) {
     const ingredientsString = ingredientsArr.join(", ")
+    console.log(ingredientsString);
+    
     try {
         const response = await hf.chatCompletion({
             model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
             messages: [
                 { role: "system", content: SYSTEM_PROMPT },
-                { role: "user", content: `I have ${ingredientsString}. Please give me a recipe you'd recommend I make!` },
+                { role: "user", content: `I have ${ingredientsString}. Please give me a recipe you'd recommend I make using only the listed ingredients and nothing else!` },
             ],
             max_tokens: 1024,
         })
