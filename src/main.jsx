@@ -7,6 +7,7 @@ import Home from './pages/Home.jsx'
 import Food from './pages/Food.jsx'
 import Ingredients from './pages/Ingredients.jsx'
 import { Provider } from 'react-redux'
+import FoodImage from './pages/FoodImage.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
       <Route path='' element={<Home />}/>
       <Route path='/food-name' element={<Food />}/>
       <Route path='/ingredients' element={<Ingredients />}/>
+      <Route path='/food-image' element={<FoodImage />}/>
     </Route>
   )
 )

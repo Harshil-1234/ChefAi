@@ -21,7 +21,7 @@ function Home() {
                     description='Got random ingredients but no clue what to cook? Enter what’s in your kitchen, and we’ll whip up the best recipe for you! No food wasted—only tasty surprises! 🥑🔥'
                     />
             </Link>
-            <Link to='/ingredients'>
+            <Link to='/food-image'>
                 <Card 
                     title='Recipe from Image'
                     image='https://thumbs.dreamstime.com/b/assorted-indian-recipes-food-various-spices-rice-wooden-table-92742528.jpg'

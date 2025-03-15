@@ -44,3 +44,35 @@ export async function getRecipeFromIngredients(ingredientsArr) {
         console.error(err.message)
     }
 }
+
+export async function getRecipeFromImage(foodImage) {
+    try {
+        // Step 1: Identify the food from the image
+        const classificationResponse = await hf.imageClassification({
+            model: "google/vit-base-patch16-224",
+            data: foodImage,
+        })
+        
+        const foodName = classificationResponse[0]?.label
+
+        if (!foodName) {
+            return "Oops! I couldn't recognize this dish. Try a clearer image!";
+        }
+
+        // Step 2: Get the recipe using the identified food name
+        const recipeResponse = await hf.chatCompletion({
+            model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
+            messages: [
+                { role: "system", content: SYSTEM_PROMPT },
+                { role: "user", content: `I have an image of ${foodName}. Please tell the dish name and give me a recipe to prepare it!` },
+            ],
+            max_tokens: 1024,
+        })
+
+        return recipeResponse.choices[0].message.content
+
+    } catch (err) {
+        console.error("Error in getRecipeFromImage:", err.message)
+        return "Oops! Something went wrong while processing the image.";
+    }
+}
